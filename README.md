@@ -427,60 +427,17 @@ For more comprehensive documentation, see
 	http://docs.mongodb.org/
 Questions? Try the support group
 	http://groups.google.com/group/mongodb-user
-> use  admin
-switched to db admin
-> db.auth("admin","password")
-1
 > 
 
-6. Create a service to connect mongo from outside of the pod using the below template. 
-
-cd kube/mongo_service.yaml
-
-7. Deploy the above file to create a service. 
-
-kubectl apply -f mongo_service.yaml
--
-service/database created
-
-8. check the service status
-
-kubectl get service -n mongodb
--
-NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-database   ClusterIP   None         <none>        <none>    7s
-
-
-
-(H) Deploy kafka connectors to source data from mongo
-
-1. Consume from the beginning.
-https://www.mongodb.com/docs/kafka-connector/current/source-connector/usage-examples/copy-existing-data/#std-label-source-usage-example-copy-existing-data
-
-
-
-
-
-
-
-
+5.1. connect db using credentails 
 
 > use admin
 switched to db admin
 >  db.auth("admin","password")
 1
-> show dbs
-2023-03-21T11:51:36.202+0000 E QUERY    [js] Error: listDatabases failed:{
-	"ok" : 0,
-	"errmsg" : "not master and slaveOk=false",
-	"code" : 13435,
-	"codeName" : "NotMasterNoSlaveOk"
-} :
-_getErrorWithCode@src/mongo/shell/utils.js:25:13
-Mongo.prototype.getDBs@src/mongo/shell/mongo.js:139:1
-shellHelper.show@src/mongo/shell/utils.js:882:13
-shellHelper@src/mongo/shell/utils.js:766:15
-@(shellhelp2):1:1
+
+5.2. initate the mongodb primary mode
+
 > rs.initiate()
 {
 	"info2" : "no configuration specified. Using a default configuration for the set",
@@ -570,4 +527,31 @@ rs0:PRIMARY> db.fruits.find().pretty()
 	"price" : 3
 }
 rs0:PRIMARY> 
+
+
+
+
+6. Create a service to connect mongo from outside of the pod using the below template. 
+
+cd kube/mongo_service.yaml
+
+7. Deploy the above file to create a service. 
+
+kubectl apply -f mongo_service.yaml
+-
+service/database created
+
+8. check the service status
+
+kubectl get service -n mongodb
+-
+NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+database   ClusterIP   None         <none>        <none>    7s
+
+
+
+(H) Deploy kafka connectors to source data from mongo
+
+1. Consume from the beginning.
+https://www.mongodb.com/docs/kafka-connector/current/source-connector/usage-examples/copy-existing-data/#std-label-source-usage-example-copy-existing-data
 
