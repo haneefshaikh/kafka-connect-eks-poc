@@ -10,7 +10,7 @@ spec:
   tasksMax: 1
   config:
     #connection.uri: "mongodb://${file:/opt/kafka/external-configuration/mongo-credentials/mongo-credentials.properties:username}:${file:/opt/kafka/external-configuration/mongo-credentials/mongo-credentials.properties:password}@database.mongodb:27017"
-    connection.uri: "mongodb://admin:password@mongodb-standalone-0:27017"
+    connection.uri: "mongodb://admin:password@database.mongodb.svc.cluster.local:27017"
     database: "admin"
     topic.prefix: mongo-src
     collection: "fruits"

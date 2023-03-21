@@ -1,4 +1,5 @@
-A) Strimzi operator Installation
+(A) Strimzi operator Installation
+-
 
 It is a step-by-step guide to installing Kafka and its components on k8s.
 
@@ -6,7 +7,7 @@ It is a step-by-step guide to installing Kafka and its components on k8s.
 1. create namespace strimzi-operator and kafka-poc
 
 kubectl create namespace strimzi-operator-ns
--
+---
 namespace/strimzi-operator-ns created
 
 kubectl create namespace kafka-poc-ns
@@ -270,6 +271,7 @@ For the poc we will install single node kafka cluster.
 
 1. Create kafka-persistent-single.yaml file using below.
 
+cd kube/kafka-persistent-single.yaml 
 
 2. Apply the template to create Kafka cluster.
 
@@ -432,13 +434,17 @@ Questions? Try the support group
 5.1. connect db using credentails 
 
 > use admin
+-
 switched to db admin
+
 >  db.auth("admin","password")
+-
 1
 
 5.2. initate the mongodb primary mode and check the config
 
 > rs.initiate()
+-
 {
 	"info2" : "no configuration specified. Using a default configuration for the set",
 	"me" : "mongodb-standalone-0:27017",
@@ -446,6 +452,7 @@ switched to db admin
 }
 
 rs0:SECONDARY> rs.conf()
+-
 {
 	"_id" : "rs0",
 	"version" : 1,
@@ -487,6 +494,7 @@ rs0:SECONDARY> rs.conf()
 5.3. create collection
 
 rs0:PRIMARY> db.createCollection("fruits")
+-
 {
 	"ok" : 1,
 	"operationTime" : Timestamp(1679399589, 1),
@@ -503,6 +511,7 @@ rs0:PRIMARY> db.createCollection("fruits")
 5.4. insert data into collections 
 
 rs0:PRIMARY> db.fruits.insertMany([ {name: "apple", origin: "usa", price: 5}, {name: "orange", origin: "italy", price: 3}, {name: "mango", origin: "malaysia", price: 3} ])
+-
 {
 	"acknowledged" : true,
 	"insertedIds" : [
@@ -515,6 +524,7 @@ rs0:PRIMARY> db.fruits.insertMany([ {name: "apple", origin: "usa", price: 5}, {n
 5.5 check created database
 
 rs0:PRIMARY> show dbs
+-
 admin   0.000GB
 config  0.000GB
 local   0.000GB
@@ -522,6 +532,7 @@ local   0.000GB
 5.6. check inserted data in the collection
 
 rs0:PRIMARY> db.fruits.find().pretty()
+-
 {
 	"_id" : ObjectId("64199aabcbf9c20ec3d8ab81"),
 	"name" : "apple",

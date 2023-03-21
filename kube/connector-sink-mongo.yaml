@@ -10,7 +10,7 @@ spec:
   tasksMax: 1
   config:
     topics: mongo-src
-    connection.uri: "mongodb://admin:password@mongodb-standalone-0:27017" 
+    connection.uri: "mongodb://admin:password@database.mongodb.svc.cluster.local:27017" 
     database: "admin" 
     collection: "fruits_sink" 
     post.processor.chain: com.mongodb.kafka.connect.sink.processor.DocumentIdAdder,com.mongodb.kafka.connect.sink.processor.KafkaMetaAdder 
