@@ -1,0 +1,37 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  name: kafka-connect-poc-cluster
+  namespace: kafka-poc-ns
+  annotations:
+    strimzi.io/use-connector-resources: "true"
+#  # use-connector-resources configures this KafkaConnect
+#  # to use KafkaConnector resources to avoid
+#  # needing to call the Connect REST API directly
+spec:
+  version: 3.3.1
+  replicas: 1
+  bootstrapServers: kafka-poc-cluster-kafka-bootstrap:9092
+  config:
+    group.id: connect-cluster
+    offset.storage.topic: connect-cluster-offsets
+    config.storage.topic: connect-cluster-configs
+    status.storage.topic: connect-cluster-status
+    # -1 means it will use the default replication factor configured in the broker
+    config.storage.replication.factor: -1
+    offset.storage.replication.factor: -1
+    status.storage.replication.factor: -1
+  build:
+    output:
+      type: docker
+      image: 509002973204.dkr.ecr.us-east-1.amazonaws.com/de_kafka_connect:latest
+      pushSecret: regcred
+    plugins:
+      - name: file-source
+        artifacts:
+          - type: jar
+            url: https://repo1.maven.org/maven2/org/apache/kafka/connect-file/3.2.0/connect-file-3.2.0.jar
+      - name: mongo-source
+        artifacts:
+        - type: jar
+          url: https://repo1.maven.org/maven2/org/mongodb/kafka/mongo-kafka-connect/1.8.0/mongo-kafka-connect-1.8.0-all.jar
