@@ -555,3 +555,15 @@ database   ClusterIP   None         <none>        <none>    7s
 1. Consume from the beginning.
 https://www.mongodb.com/docs/kafka-connector/current/source-connector/usage-examples/copy-existing-data/#std-label-source-usage-example-copy-existing-data
 
+
+
+
+kubectl run kafka-consumer -n kafka-poc-ns -ti --image=quay.io/strimzi/kafka:0.32.0-kafka-3.3.1 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server kafka-poc-cluster-kafka-bootstrap:9092 --topic mongo_src --from-beginning
+
+
+
+db.fruits.insertMany([ {name: "banana", origin: "india", price: 50}, {name: "wine", origin: "nasik", price: 30}, {name: "kela", origin: "pune", price: 31} ])
+
+
+
+kubectl run kafka-producer -n kafka-poc-ns -ti --image=quay.io/strimzi/kafka:0.32.0-kafka-3.3.1 --rm=true --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server kafka-poc-cluster-kafka-bootstrap:9092 --topic mongo-src
