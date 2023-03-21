@@ -436,7 +436,7 @@ switched to db admin
 >  db.auth("admin","password")
 1
 
-5.2. initate the mongodb primary mode
+5.2. initate the mongodb primary mode and check the config
 
 > rs.initiate()
 {
@@ -444,6 +444,7 @@ switched to db admin
 	"me" : "mongodb-standalone-0:27017",
 	"ok" : 1
 }
+
 rs0:SECONDARY> rs.conf()
 {
 	"_id" : "rs0",
@@ -482,6 +483,9 @@ rs0:SECONDARY> rs.conf()
 		"replicaSetId" : ObjectId("64199a5fce80ce02ca996dc2")
 	}
 }
+
+5.3. create collection
+
 rs0:PRIMARY> db.createCollection("fruits")
 {
 	"ok" : 1,
@@ -494,6 +498,10 @@ rs0:PRIMARY> db.createCollection("fruits")
 		}
 	}
 }
+
+
+5.4. insert data into collections 
+
 rs0:PRIMARY> db.fruits.insertMany([ {name: "apple", origin: "usa", price: 5}, {name: "orange", origin: "italy", price: 3}, {name: "mango", origin: "malaysia", price: 3} ])
 {
 	"acknowledged" : true,
@@ -503,10 +511,16 @@ rs0:PRIMARY> db.fruits.insertMany([ {name: "apple", origin: "usa", price: 5}, {n
 		ObjectId("64199aabcbf9c20ec3d8ab83")
 	]
 }
+
+5.5 check created database
+
 rs0:PRIMARY> show dbs
 admin   0.000GB
 config  0.000GB
 local   0.000GB
+
+5.6. check inserted data in the collection
+
 rs0:PRIMARY> db.fruits.find().pretty()
 {
 	"_id" : ObjectId("64199aabcbf9c20ec3d8ab81"),
@@ -527,8 +541,6 @@ rs0:PRIMARY> db.fruits.find().pretty()
 	"price" : 3
 }
 rs0:PRIMARY> 
-
-
 
 
 6. Create a service to connect mongo from outside of the pod using the below template. 
