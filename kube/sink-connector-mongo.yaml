@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata: 
-  name: mongodb-sink-connector
+  name: sink-connector-mongo
   namespace: kafka-poc-ns
   labels: 
     strimzi.io/cluster: kafka-connect-poc-cluster

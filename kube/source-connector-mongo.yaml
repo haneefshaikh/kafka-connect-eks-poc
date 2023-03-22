@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
-  name: from-beginning-mongo-source-connector
+  name: source-connector-mongo
   namespace: kafka-poc-ns
   labels:
     strimzi.io/cluster: kafka-connect-poc-cluster
@@ -15,7 +15,7 @@ spec:
     topic.prefix: mongo-src
     collection: "fruits"
     copy.existing: true
-    topic.namespace.map: "{\"*\": \"from_beginning\"}"
+    #topic.namespace.map: "{\"*\": \"*\"}"
     change.data.capture.handler: "com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler"
 # by default when string converter is not used then document is escaped by \ in kafka.
     key.converter: "org.apache.kafka.connect.storage.StringConverter"

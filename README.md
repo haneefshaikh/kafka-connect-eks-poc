@@ -510,7 +510,7 @@ rs0:PRIMARY> db.createCollection("fruits")
 
 5.4. insert data into collections 
 
-rs0:PRIMARY> db.fruits.insertMany([ {name: "apple", origin: "usa", price: 5}, {name: "orange", origin: "italy", price: 3}, {name: "mango", origin: "malaysia", price: 3} ])
+rs0:PRIMARY> db.fruits.insertMany([ {"name": "apple", "origin": "usa", price: 5}, {"name": "orange", "origin": "italy", price: 3}, {"name": "mango", "origin": "malaysia", price: 3} ])
 -
 {
 	"acknowledged" : true,
@@ -585,7 +585,7 @@ kubectl run kafka-consumer -n kafka-poc-ns -ti --image=quay.io/strimzi/kafka:0.3
 
 
 
-db.fruits.insertMany([ {name: "banana", origin: "india", price: 50}, {name: "wine", origin: "nasik", price: 30}, {name: "kela", origin: "pune", price: 31} ])
+db.fruits.insertMany([ {"name": "banana", "origin": "india", price: 50}, {"name": "wine", "origin": "nasik", price: 30}, {"name": "barry", "origin": "NY", price: 31} ])
 
 
 

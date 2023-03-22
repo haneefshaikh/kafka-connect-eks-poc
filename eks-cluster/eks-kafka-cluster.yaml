@@ -8,7 +8,7 @@ metadata:
 nodeGroups:
   - name: eks-kafka-ng-01
     instanceType: t2.medium
-    desiredCapacity: 2
+    desiredCapacity: 1
     volumeSize: 20
     ssh:
       allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
@@ -16,7 +16,7 @@ nodeGroups:
 
   - name: eks-kafka-ng-02
     instanceType: t2.small
-    desiredCapacity: 2
+    desiredCapacity: 1
     volumeSize: 20
     ssh:
       allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
