@@ -1,6 +1,6 @@
-## It is a step-by-step guide to installing Kafka and its components on k8s.
+# Step-By-Step guide to installing Kafka Connect and its components on EKS.
 
-# (A) Strimzi operator Installation
+## (A) Strimzi operator Installation
 
 
 1. create namespace `strimzi-operator` and `kafka-poc`
@@ -83,7 +83,7 @@ strimzi-cluster-operator-6977966d6d-lfsfd   1/1     Running   0          41s
 kubectl describe pod strimzi-cluster-operator-6977966d6d-j8svq -n strimzi-operator-ns
 ```
 
-# (B) To create an IAM OIDC identity provider for your cluster with eksctl
+## (B) To create an IAM OIDC identity provider for your cluster with eksctl
 
 
 1. Determine whether you have an existing IAM OIDC provider for your cluster.
@@ -113,7 +113,7 @@ aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ```
 
 
-# (C) Deploy and test the Amazon EBS CSI driver
+## (C) Deploy and test the Amazon EBS CSI driver
 
 ### Deploy the Amazon EBS CSI driver:
 
@@ -209,7 +209,7 @@ kubectl delete pods \
 ```
 
 
-# (D) Test the Amazon EBS CSI driver:
+## (D) Test the Amazon EBS CSI driver:
 
 
 ### You can test your Amazon EBS CSI driver with an application that uses dynamic provisioning. The Amazon EBS volume is provisioned on demand.
@@ -258,7 +258,7 @@ kubectl delete pods app
 ```
 
 
-# (E) Kafka Cluster Installation
+## (E) Kafka Cluster Installation
 
 
 ### For the poc we will install single node kafka cluster.
@@ -330,8 +330,7 @@ If you don't see a command prompt, try pressing enter.
 5
 ```
 
-
-# (F) Kafka Connect Installation
+## (F) Kafka Connect Installation
 
 
 1. Download `kafka-connect.yaml` template.
@@ -385,7 +384,7 @@ URI : 509002973204.dkr.ecr.us-east-1.amazonaws.com/de_kafka_connect:latest
 Digest : sha256:6bd54ec22743953b404b636d0bc1131d10373138faae6efbb057c7e0567294a2
 ```
 
-# (G) Installation of Mongo DB and Creating Collections into Mongo DB
+## (G) Installation of Mongo DB and Creating Collections into Mongo DB
 
 
 1. create namespace MongoDB
@@ -567,8 +566,7 @@ NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 database   ClusterIP   None         <none>        <none>    7s
 ```
 
-
-# (H) Deploy kafka connectors to source data from mongo
+## (H) Deploy kafka connectors to source data from mongo
 
 
 1. Consume from the beginning.
