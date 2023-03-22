@@ -3,7 +3,7 @@
 # (A) Strimzi operator Installation
 
 
-1. create namespace strimzi-operator and kafka-poc
+1. create namespace `strimzi-operator` and `kafka-poc`
 ```
 kubectl create namespace strimzi-operator-ns
 ---
@@ -126,7 +126,7 @@ curl -o example-iam-policy.json https://raw.githubusercontent.com/kubernetes-sig
 100   599  100   599    0     0    756      0 --:--:-- --:--:-- --:--:--   762
 ```
 
-2.    Create an IAM policy named Amazon_EBS_CSI_Driver:
+2.    Create an IAM policy named `Amazon_EBS_CSI_Driver`:
 ```
 aws iam create-policy --policy-name AmazonEKS_EBS_CSI_Driver_Policy --policy-document file://example-iam-policy.json
 -
@@ -214,7 +214,7 @@ kubectl delete pods \
 
 ### You can test your Amazon EBS CSI driver with an application that uses dynamic provisioning. The Amazon EBS volume is provisioned on demand.
 
-1.    Clone the aws-ebs-csi-driver repository from AWS GitHub:
+1.    Clone the `aws-ebs-csi-driver` repository from AWS GitHub:
 ```
 git clone https://github.com/kubernetes-sigs/aws-ebs-csi-driver.git
 ```
@@ -228,7 +228,7 @@ kubectl apply -f manifests/
 ```
 Note: The kubectl command creates a StorageClass (from the Kubernetes website), PersistentVolumeClaim (PVC) (from the Kubernetes website), and pod. The pod references the PVC. An Amazon EBS volume is provisioned only when the pod is created.
 
-4.    Describe the ebs-sc storage class:
+4.    Describe the `ebs-sc` storage class:
 ```
 kubectl describe storageclass ebs-sc
 ```
@@ -263,7 +263,7 @@ kubectl delete pods app
 
 ### For the poc we will install single node kafka cluster.
 
-1. Create kafka-persistent-single.yaml file using below.
+1. Create `kafka-persistent-single.yaml` file using below.
 ```
 cd kube/kafka-persistent-single.yaml 
 ```
@@ -290,7 +290,7 @@ kafka-poc-cluster-entity-operator-bd65b74f7-fw9zf   3/3     Running   0         
 kafka-poc-cluster-kafka-0                           1/1     Running   0          3m6s
 kafka-poc-cluster-zookeeper-0                       1/1     Running   0          4m
 ```
-5. create topic using the kafka-topic.yaml and update strimzi.io/cluster: kafka-poc-cluster as per your cluster name.
+5. create topic using the `kafka-topic.yaml` and update `strimzi.io/cluster: kafka-poc-cluster` as per your cluster name.
 ```
 strimzi.io/cluster: kafka-poc-cluster
 ```
@@ -307,7 +307,7 @@ kubectl get kafkatopic
 NAME       CLUSTER             PARTITIONS   REPLICATION FACTOR   READY
 my-topic   kafka-poc-cluster   1            1                    
 ```
-8. Insert data into the kafka topic my-topic, use ctrl+c to exit
+8. Insert data into the kafka topic `my-topic`, use ctrl+c to exit
 ```
 kubectl run kafka-producer -n kafka-poc-ns -ti --image=quay.io/strimzi/kafka:0.32.0-kafka-3.3.1 --rm=true --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server kafka-poc-cluster-kafka-bootstrap:9092 --topic my-topic
 -
@@ -318,7 +318,7 @@ If you don't see a command prompt, try pressing enter.
 >4
 >5
 ```
-9. Consume data from topic my-topic , use ctrl+c to exit
+9. Consume data from topic `my-topic` , use ctrl+c to exit
 ```
 kubectl run kafka-consumer -n kafka-poc-ns -ti --image=quay.io/strimzi/kafka:0.32.0-kafka-3.3.1 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server kafka-poc-cluster-kafka-bootstrap:9092 --topic my-topic --from-beginning
 -
@@ -334,15 +334,15 @@ If you don't see a command prompt, try pressing enter.
 # (F) Kafka Connect Installation
 
 
-1. Download kafka-connect.yaml template.
+1. Download `kafka-connect.yaml` template.
 ```
 cd kube/kafka-connect.yaml
 ```
-2. Create ECR repo de_kafka_connect to store the kafka connect build image.
+2. Create ECR repo `de_kafka_connect` to store the kafka connect build image.
 ```
 repo name -> de_kafka_connect
 ```
-3. Create a registry secret within the above (kafka-poc-ns) namespace that would be used to pull an image from a private ECR repository:
+3. Create a registry secret within the above (`kafka-poc-ns`) namespace that would be used to pull an image from a private ECR repository:
 ```
 kubectl create secret docker-registry regcred \
 --docker-server=509002973204.dkr.ecr.us-east-1.amazonaws.com \
@@ -350,7 +350,7 @@ kubectl create secret docker-registry regcred \
 --docker-password=$(aws ecr get-login-password) \
 --namespace=kafka-poc-ns
 ```
-4. create file kafka-connect.yaml to deploy kafka connect.
+4. create file `kafka-connect.yaml` to deploy kafka connect.
 ```
 cd kube/kafka-connect.yaml
 ```
