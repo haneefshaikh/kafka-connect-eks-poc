@@ -1,11 +1,10 @@
-(A) Strimzi operator Installation
--
+#(A) Strimzi operator Installation
 
 It is a step-by-step guide to installing Kafka and its components on k8s.
 
 
 1. create namespace strimzi-operator and kafka-poc
-
+```
 kubectl create namespace strimzi-operator-ns
 ---
 namespace/strimzi-operator-ns created
@@ -23,7 +22,7 @@ kube-node-lease       Active   24m
 kube-public           Active   24m
 kube-system           Active   24m
 strimzi-operator-ns   Active   13s
-
+```
 2.  Strimzi operator Installation
     
     It is a step-by-step guide to installing Kafka and its components on k8s.
@@ -31,17 +30,17 @@ strimzi-operator-ns   Active   13s
 
 2.1 Downloading Strimzi
 
-
+```
 CHART_VERSION=0.32.0
 wget https://github.com/strimzi/strimzi-kafka-operator/releases/download/${CHART_VERSION}/strimzi-kafka-operator-helm-3-chart-${CHART_VERSION}.tgz
 
-
 tar -xvf strimzi-kafka-operator-helm-3-chart-${CHART_VERSION}.tgz
 cd strimzi-kafka-operator
-
+```
 
 2.2 install helm repo
 
+```
 helm repo add strimzi https://strimzi.io/charts/
 
 helm repo list
@@ -56,16 +55,16 @@ helm search repo strimzi
 NAME                          	CHART VERSION	APP VERSION	DESCRIPTION                                       
 strimzi/strimzi-drain-cleaner 	0.4.2        	0.4.2      	Utility which helps with moving the Apache Kafk...
 strimzi/strimzi-kafka-operator	0.33.2       	0.33.2     	Strimzi: Apache Kafka running on Kubernetes  
-
+```
 
 2.3 Edit the values.yaml and add the namespace in which the kafka cluster needs to be installed.
-
+```
 watchNamespaces:
  - kafka-poc-ns
-
+```
 2.4. Install the helm chart.
 
-
+```
 helm install strimzi strimzi/strimzi-kafka-operator --namespace strimzi-operator-ns
 -
 NAME: strimzi
@@ -76,18 +75,18 @@ REVISION: 1
 TEST SUITE: None
 NOTES:
 Thank you for installing strimzi-kafka-operator-0.33.2
-
+```
 2.5. check the pod deployed for strimzi operator
-
+```
 kubectl get pods -n strimzi-operator-ns
 -
 NAME                                        READY   STATUS    RESTARTS   AGE
 strimzi-cluster-operator-6977966d6d-lfsfd   1/1     Running   0          41s
-
+```
 2.6. Describe the pod
-
+```
 kubectl describe pod strimzi-cluster-operator-6977966d6d-j8svq -n strimzi-operator-ns
-
+```
 
  
 B) To create an IAM OIDC identity provider for your cluster with eksctl
